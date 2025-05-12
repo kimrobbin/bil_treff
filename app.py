@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS vehicle (
     id INT AUTO_INCREMENT PRIMARY KEY,
     type VARCHAR(255) NOT NULL,
     brand VARCHAR(255) NOT NULL
-    
 );       
                  
 """)
@@ -22,7 +21,9 @@ CREATE TABLE IF NOT EXISTS contact_form (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    vehicle_id INT NOT NULL,
     FOREIGN KEY (vehicle_id) REFERENCES vehicle(id) ON DELETE CASCADE
+    
 );
 
 """)
@@ -41,11 +42,37 @@ def index():
 def submit_form():
     name = request.form.get('name')
     email = request.form.get('email')
-    message = request.form.get('message')
-
-    print(f"Name: {name}, Email: {email}, Message: {message}")
+    vehicle = request.form.get('vehicle')
+    merke = request.form.get('type_vehicle')
+    
+    print(f"Name: {name}, Email: {email}, Vehicle: {vehicle}, Brand: {merke}")
+    
+    # Insert into the vehicle table
+    sql_statement2 = "INSERT INTO vehicle (type, brand) VALUES (%s, %s)"
+    values2 = (vehicle, merke)
+    mycursor.execute(sql_statement2, values2)
+    
+    # Get the ID of the newly inserted vehicle
+    vehicle_id = mycursor.lastrowid
+    
+    # Insert into the contact_form table with the vehicle_id
+    sql_statement = "INSERT INTO contact_form (name, email, vehicle_id) VALUES (%s, %s, %s)"
+    values = (name, email, vehicle_id)
+    mycursor.execute(sql_statement, values)
+    
+    dbconn.commit()
+    
     return redirect(url_for('index'))
 
+
+@app.route('/vehicles')
+def vehicles():
+    mycursor.execute("SELECT * FROM vehicle")
+    vehicles = mycursor.fetchall()
+   
+   
+   
+    return render_template("index.html", vehicles=vehicles)
 
 if __name__ == '__main__':
     app.run(debug=True)
