@@ -33,7 +33,7 @@
     </form>
 
 
-    <table id="personer" >
+    <table id="personer">
         <tr>
             <td>Fornavn og etternavn</td>
             <td>Email</td>
@@ -42,7 +42,7 @@
             <td>Deltag tid </td>
 
         </tr>
-            {% for deltagere in deltagere %}
+        {% for deltagere in deltagere %}
         <tr>
             <td> {{ deltagere[0] }} </td>
             <td> {{ deltagere[1] }} </td>
@@ -51,18 +51,29 @@
             <td> {{ deltagere[4] }} </td>
 
         </tr>
-            {% endfor %}
-
+        {% endfor %}
     </table>
 
 
-     <form action="/aktivitet" method="POST">
-        <label for="submit_aktivitet">Lag en aktivitet: </label><br>
-        <input type="text" id="submit_aktivitet" name="submit_aktivitet">
-        <br><br>
+    <h1>Aktivitet: </h1>
+        <form action="/aktivitet" method="POST">
+            <label for="submit_aktivitet">Lag en aktivitet: </label><br>
+            <input type="text" id="submit_aktivitet" name="submit_aktivitet">
+            <br><br>
+            <input type="submit" value="aktivitet">
+        </form>
 
-        <input type="submit" value="aktivitet">
-    </form>
+    <table id="aktivitet">
+        <tr>
+            <td>Aktivitet</td>
+            <td>Aktivitet lagd</td>
+        </tr>
+        {% for aktivitet in aktiviteter %}
+        <tr>
+            <td> {{ aktivitet[1] }} </td>
+            <td> {{ aktivitet[2] }} </td>
+        </tr>
+        {% endfor %}
 
 </body>
 

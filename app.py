@@ -45,15 +45,26 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    # Henter alle deltakere
     mycursor.execute("""
         SELECT contact_form.name, contact_form.email, vehicle.type, vehicle.brand, contact_form.date
         FROM contact_form
         JOIN vehicle ON contact_form.vehicle_id = vehicle.id
     """)
     deltagere = mycursor.fetchall()
-    return render_template("index.html", deltagere=deltagere)
+    
+    # Henter alle aktiviteter
+    mycursor.execute("SELECT * FROM aktiviteter")
+    aktiviteter = mycursor.fetchall()
+    
+    # senderer til index.html
+    return render_template("index.html", deltagere=deltagere, aktiviteter=aktiviteter)
 
+def get_activities():
+   
+    return render_template("index.html", ) 
 
+# Regristreing logik
 @app.route('/submit', methods=['POST'])
 def submit_form():
     name = request.form.get('name')
@@ -81,16 +92,21 @@ def submit_form():
     return redirect(url_for('index'))
 
 
-@app.route('/aktiviteter', methods=['POST'])
+# Aktivitet logik
+
+@app.route('/aktivitet', methods=['POST'])
 def submit_activity():
     name = request.form.get('submit_aktivitet')
 
-    sql_statement = "INSERT INTO aktiviteter (name) VALUES (%s)"
-    mycursor.execute(sql_statement, name)
+    if name:
+        sql_statement = "INSERT INTO aktiviteter (name) VALUES (%s)"
+        mycursor.execute(sql_statement, (name,))
+        dbconn.commit()
 
-    dbconn.commit()
    
     return redirect(url_for('index'))
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
