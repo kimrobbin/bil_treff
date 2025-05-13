@@ -29,7 +29,7 @@
 
     <input type="submit" value="Submit">
 </form>
-<h2>Registered Vehicles:</h2>
+<!-- <h2>Registered Vehicles:</h2>
 <table>
     <tr>
         <td> Persjon id</td>
@@ -45,7 +45,7 @@
         <td> Type: {{ resultat[1] }} </td>
         <td> Brand: {{ resultat[2] }} </td>
     </tr>
-    {% endfor %}
+    {% endfor %} -->
 </table>
 
 <br><br>
@@ -55,7 +55,7 @@
 </form>
 <br>
 <br>
-<table>
+<!-- <table>
 {% for deltagere in deltagere %}
     <tr>
         <td> Navn:  {{ deltagere[1]}} </td>
@@ -63,9 +63,13 @@
     </tr>
 
     {% endfor %}
-</table>
+</table> -->
 
-
+<ul>
+  {% for deltagere in deltagere %}
+    <li>{{ deltagere[0] }} ({{ deltagere[1] }}) - {{ deltagere[2] }} {{ deltagere[3] }}</li>
+  {% endfor %}
+</ul>
 
 </body>
 </html>

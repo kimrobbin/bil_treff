@@ -35,11 +35,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    mycursor.execute("SELECT * FROM vehicle")
-    resultat = mycursor.fetchall()   
-    return render_template('index.html', resultater=resultat)
-
-
+    mycursor.execute("""
+        SELECT contact_form.name, contact_form.email, vehicle.type, vehicle.brand
+        FROM contact_form
+        JOIN vehicle ON contact_form.vehicle_id = vehicle.id
+    """)
+    deltagere = mycursor.fetchall()
+    return render_template("index.html", deltagere=deltagere)
     
 
 
@@ -50,7 +52,7 @@ def submit_form():
     vehicle = request.form.get('vehicle')
     merke = request.form.get('type_vehicle')
     
-    print(f"Name: {name}, Email: {email}, Vehicle: {vehicle}, Brand: {merke}")
+    # print(f"Name: {name}, Email: {email}, Vehicle: {vehicle}, Brand: {merke}")
     
     # Insert into the vehicle table
     sql_statement2 = "INSERT INTO vehicle (type, brand) VALUES (%s, %s)"
@@ -69,11 +71,8 @@ def submit_form():
     
     return redirect(url_for('index'))
 
-@app.route("/deltager", methods=["POST"])
-def deltagere():
-    mycursor.execute("SELECT * FROM contact_form")
-    deltagere = mycursor.fetchall()
-    return render_template("index.html", deltagere=deltagere)
+
+    
    
 
 
