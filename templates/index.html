@@ -1,75 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./static/style.css">>
+    <link rel="stylesheet" href="./static/style.css">
 </head>
+
 <body>
 
 
-<h1>Regristering: </h1>
-<form action="/submit" method="POST"> 
-    <label for="name">Fornavn og etternavn:</label><br>
-    <input type="text" id="name" name="name">
-    <br><br>
+    <h1>Regristering: </h1>
+    <form action="/submit" method="POST">
+        <label for="name">Fornavn og etternavn:</label><br>
+        <input type="text" id="name" name="name">
+        <br><br>
 
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email">
-    <br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email">
+        <br><br>
 
-    <label for="vehicle">Type kjøretøy:</label><br>
-    <input type="text" id="vehicle" name="vehicle" ></input>
-    <br><br>
-    <label for="type_vehicle">Merke av kjøretøy:</label><br>
-    <input type="text" id="type_vehicle" name="type_vehicle" ></input><br><br>
+        <label for="vehicle">Type kjøretøy:</label><br>
+        <input type="text" id="vehicle" name="vehicle"></input>
+        <br><br>
+        <label for="type_vehicle">Merke av kjøretøy:</label><br>
+        <input type="text" id="type_vehicle" name="type_vehicle"></input><br><br>
 
 
 
-    <input type="submit" value="Submit">
-</form>
-<!-- <h2>Registered Vehicles:</h2>
-<table>
-    <tr>
-        <td> Persjon id</td>
-        <td> Type bil</td>
-        <td> Bil merke</td>
-    </tr>
+        <input type="submit" value="Submit">
+    </form>
 
-    {% for resultat in resultater %}
-    
 
-    <tr>
-        <td> ID: {{ resultat[0] }}</td>
-        <td> Type: {{ resultat[1] }} </td>
-        <td> Brand: {{ resultat[2] }} </td>
-    </tr>
-    {% endfor %} -->
-</table>
+    <table id="personer" >
+        <tr>
+            <td>Fornavn og etternavn</td>
+            <td>Email</td>
+            <td>Type kjøretøy</td>
+            <td>Merke av kjøretøy </td>
+            <td>Deltag tid </td>
 
-<br><br>
-<form action="/deltagere" method="post">
-    <label for="deltagere">Vis deltagere:</label><br>
-    <input type="submit" id="deltagere" name="deltagere"  >
-</form>
-<br>
-<br>
-<!-- <table>
-{% for deltagere in deltagere %}
-    <tr>
-        <td> Navn:  {{ deltagere[1]}} </td>
-        
-    </tr>
+        </tr>
+            {% for deltagere in deltagere %}
+        <tr>
+            <td> {{ deltagere[0] }} </td>
+            <td> {{ deltagere[1] }} </td>
+            <td> {{ deltagere[2] }} </td>
+            <td> {{ deltagere[3] }} </td>
+            <td> {{ deltagere[4] }} </td>
 
-    {% endfor %}
-</table> -->
+        </tr>
+            {% endfor %}
 
-<ul>
-  {% for deltagere in deltagere %}
-    <li>{{ deltagere[0] }} ({{ deltagere[1] }}) - {{ deltagere[2] }} {{ deltagere[3] }}</li>
-  {% endfor %}
-</ul>
+    </table>
+
+
+     <form action="/aktivitet" method="POST">
+        <label for="submit_aktivitet">Lag en aktivitet: </label><br>
+        <input type="text" id="submit_aktivitet" name="submit_aktivitet">
+        <br><br>
+
+        <input type="submit" value="aktivitet">
+    </form>
 
 </body>
+
 </html>
