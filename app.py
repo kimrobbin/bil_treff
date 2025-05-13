@@ -35,7 +35,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    mycursor.execute("SELECT * FROM vehicle")
+    resultat = mycursor.fetchall()   
+    return render_template('index.html', resultater=resultat)
+
+
+    
 
 
 @app.route('/submit', methods=['POST'])
@@ -64,15 +69,13 @@ def submit_form():
     
     return redirect(url_for('index'))
 
+@app.route("/deltager", methods=["POST"])
+def deltagere():
+    mycursor.execute("SELECT * FROM contact_form")
+    deltagere = mycursor.fetchall()
+    return render_template("index.html", deltagere=deltagere)
+   
 
-@app.route('/vehicles')
-def vehicles():
-    mycursor.execute("SELECT * FROM vehicle")
-    vehicles = mycursor.fetchall()
-   
-   
-   
-    return render_template("index.html", vehicles=vehicles)
 
 if __name__ == '__main__':
     app.run(debug=True)

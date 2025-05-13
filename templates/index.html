@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./static/style.css">>
 </head>
 <body>
 
@@ -29,9 +30,42 @@
     <input type="submit" value="Submit">
 </form>
 <h2>Registered Vehicles:</h2>
-{% for vehicle in vehicles %}
-    <p>{{ vehicles }} </p>
-{% endfor %}
+<table>
+    <tr>
+        <td> Persjon id</td>
+        <td> Type bil</td>
+        <td> Bil merke</td>
+    </tr>
+
+    {% for resultat in resultater %}
+    
+
+    <tr>
+        <td> ID: {{ resultat[0] }}</td>
+        <td> Type: {{ resultat[1] }} </td>
+        <td> Brand: {{ resultat[2] }} </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br><br>
+<form action="/deltagere" method="post">
+    <label for="deltagere">Vis deltagere:</label><br>
+    <input type="submit" id="deltagere" name="deltagere"  >
+</form>
+<br>
+<br>
+<table>
+{% for deltagere in deltagere %}
+    <tr>
+        <td> Navn:  {{ deltagere[1]}} </td>
+        
+    </tr>
+
+    {% endfor %}
+</table>
+
+
 
 </body>
 </html>
