@@ -92,6 +92,7 @@ def submit_form():
     return redirect(url_for('index'))
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 # Aktivitet logik
 
@@ -105,6 +106,8 @@ def submit_activity():
         dbconn.commit()
 
 =======
+=======
+>>>>>>> Stashed changes
 @app.route("/deltagere", methods=["POST"])
 def deltagere():
     mycursor.execute("SELECT * FROM contact_form")
