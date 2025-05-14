@@ -11,6 +11,7 @@
 <body>
 
 
+<<<<<<< Updated upstream
     <h1>Regristering: </h1>
     <form action="/submit" method="POST">
         <label for="name">Fornavn og etternavn:</label><br>
@@ -31,6 +32,63 @@
 
         <input type="submit" value="Submit">
     </form>
+=======
+<h1>Regristering: </h1>
+<form action="/submit" method="POST"> 
+    <label for="name">Fornavn og etternavn:</label><br>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required>
+    <br><br>
+
+    <label for="vehicle">Type kjøretøy:</label><br>
+    <input type="text" id="vehicle" name="vehicle" ></input required>
+    <br><br>
+    <label for="type_vehicle">Merke av kjøretøy:</label><br>
+    <input type="text" id="type_vehicle" name="type_vehicle" ></input required><br><br>
+
+
+
+    <input type="submit" value="Submit">
+</form>
+<h2>Registered Vehicles:</h2>
+<table>
+    <tr>
+        <td> Persjon id</td>
+        <td> Type bil</td>
+        <td> Bil merke</td>
+    </tr>
+
+    {% for resultat in resultater %}
+    
+
+    <tr>
+        <td> ID: {{ resultat[0] }}</td>
+        <td> Type: {{ resultat[1] }} </td>
+        <td> Brand: {{ resultat[2] }} </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br><br>
+<form action="/deltagere" method="POST">
+    <label for="deltagere">Vis deltagere:</label><br>
+    <input type="submit" id="deltagere" name="deltagere"  >
+</form>
+<br>
+<br>
+<table>
+{% for deltagere in deltagere %}
+    <tr>
+        <td> Navn:  {{ deltagere[1]}} </td>
+        
+    </tr>
+
+    {% endfor %}
+</table>
+>>>>>>> Stashed changes
 
 
     <table id="personer">
